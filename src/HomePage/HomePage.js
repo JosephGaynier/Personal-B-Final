@@ -5,41 +5,56 @@ import axios from 'axios';
 var data = {
   datasets: [
     {
-      data: [30, 350, 90],
-      backgroundColor: [
-        "#ffcd56",
-        "#ff6384",
-        "#36a2eb",
-        "#fd6b19",
-        "#32CD32",
-        "#800080",
-        "#8B4513",
-      ],
+      data: [],
+      backgroundColor: [],
     },
   ],
-  labels: ["Eat out", "Rent", "Groceries"],
+  labels: [],
 };
 
-function createChart() {
-  var ctx = document.getElementById("myChart").getContext("2d");
-  var myDoughnutChart = new Chart(ctx, {
+function createDoughnutChart() {
+  var ctx = document.getElementById("doughnutChart").getContext("2d");
+  new Chart(ctx, {
     type: "doughnut",
     data: data,
   });
 }
 
-function getBudget() {
-  axios.get("http://localhost:3001/budget").then(function (res) {
-    for (var i = 0; i < res.data.MyBudget.length; i++) {
-      data.datasets[0].data[i] = res.data.MyBudget[i].budget;
-      data.labels[i] = res.data.MyBudget[i].title;
-    }
-    createChart();
+function createPieChart() {
+  var ctx = document.getElementById("pieChart").getContext("2d");
+  new Chart(ctx, {
+    type: "pie",
+    data: data,
   });
 }
-getBudget();
+
+function createBarChart() {
+  new Chart(document.getElementById("barChart").getContext("2d"), {
+    type: 'bar',
+    data: data,
+  });
+}
+
+function getBudget() {
+  const userId = parseInt(localStorage.getItem('userId'));
+  const localData = { userId };
+  axios.post("http://localhost:3000/budget", localData).then(function (res) {
+    for (var i = 0; i < res.data.length; i++) {
+      data.datasets[0].data[i] = res.data[i].budget;
+      data.datasets[0].backgroundColor[i] = res.data[i].backgroundColor;
+      data.labels[i] = res.data[i].label;
+    }
+    if (res.data.length > 0) {
+      createDoughnutChart();
+      createPieChart();
+      createBarChart();
+    }
+  });
+}
+
 
 function HomePage() {
+  getBudget();
   return (
     <div id="main" className="container center">
       <div className="page-area">
@@ -103,9 +118,20 @@ function HomePage() {
         </div>
 
         <div className="text-box">
-          <h1>Free</h1>
-          <p><canvas id="myChart" width="400" height="400"></canvas></p>
+          <h1>Pie Chart</h1>
+          <p><canvas id="pieChart" width="400" height="400"></canvas></p>
         </div>
+
+        <div className="text-box">
+          <h1>Doughnut Chart</h1>
+          <p><canvas id="doughnutChart" width="400" height="400"></canvas></p>
+        </div>
+
+        <div className="text-box">
+          <h1>Bar Chart</h1>
+          <p><canvas id="barChart" width="400" height="400"></canvas></p>
+        </div>
+
       </div>
     </div>
   );
