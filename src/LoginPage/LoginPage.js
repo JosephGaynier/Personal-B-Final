@@ -7,7 +7,7 @@ function login(username, password) {
     username,
     password
   };
-  axios.post('http://localhost:3000/login', data)
+  axios.post('https://personal-b-final-jazug.ondigitalocean.app/login', data)
       .then(res => {
           console.log(res);
           if (res && res.data && res.data.success) {

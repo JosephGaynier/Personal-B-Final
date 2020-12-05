@@ -8,7 +8,7 @@ function signUp(username, password) {
     password,
   };
   console.log(data);
-  axios.post('http://localhost:3000/signup', data)
+  axios.post('https://personal-b-final-jazug.ondigitalocean.app/signup', data)
       .then(res => {
           if (res && res.data) {
               history.push("/login");

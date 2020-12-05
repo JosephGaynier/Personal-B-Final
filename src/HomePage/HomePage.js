@@ -5,7 +5,7 @@ import history from '../history';
 
 function authorize() {
   const token = localStorage.getItem('jwt');
-  axios.get('http://localhost:3000/authorize', {
+  axios.get('https://personal-b-final-jazug.ondigitalocean.app/authorize', {
     headers: {
       'Authorization': `Bearer ${token}`
     }
