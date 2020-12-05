@@ -5,8 +5,9 @@ import { Switch, Router, Route } from 'react-router-dom';
 import Menu from './Menu/Menu';
 import Hero from './Hero/Hero';
 import HomePage from './HomePage/HomePage';
-import DashboardPage from './DashboardPage/DashboardPage';
+import EditBudgetPage from './EditBudgetPage/EditBudgetPage';
 import LoginPage from './LoginPage/LoginPage';
+import LogoutPage from './LogoutPage/LogoutPage';
 import Footer from './Footer/Footer';
 import SignUpPage from './SignUpPage/SignUpPage';
 import history from './history';
@@ -18,11 +19,14 @@ function App() {
       <Hero />
       <div className="mainContainer">
         <Switch>
-          <Route path="/dashboard">
-            <DashboardPage></DashboardPage>
+          <Route path="/editBudget">
+            <EditBudgetPage></EditBudgetPage>
           </Route>
           <Route path="/login">
             <LoginPage></LoginPage>
+          </Route>
+          <Route path="/logout">
+            <LogoutPage></LogoutPage>
           </Route>
           <Route path="/signup">
             <SignUpPage></SignUpPage>

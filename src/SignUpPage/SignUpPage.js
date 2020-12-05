@@ -10,11 +10,8 @@ function signUp(username, password) {
   console.log(data);
   axios.post('http://localhost:3000/signup', data)
       .then(res => {
-          console.log(res);
           if (res && res.data) {
-              //localStorage.setItem('jwt', res.data.token);
               history.push("/login");
-              console.log("Success!");
           }
       });
 }

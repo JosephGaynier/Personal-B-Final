@@ -9,10 +9,9 @@ function login(username, password) {
   };
   axios.post('http://localhost:3000/login', data)
       .then(res => {
-          //var token = '';
           console.log(res);
           if (res && res.data && res.data.success) {
-              //localStorage.setItem('jwt', res.data.token);
+              localStorage.setItem('jwt', res.data.token);
               localStorage.setItem('userId', res.data.userId);
               history.push("/dashboard");
           }

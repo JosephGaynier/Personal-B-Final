@@ -1,60 +1,24 @@
 import React from 'react';
-import Chart from 'chart.js';
+import GetBudgetAndCharts from '../Visuals/Visuals';
 import axios from 'axios';
+import history from '../history';
 
-var data = {
-  datasets: [
-    {
-      data: [],
-      backgroundColor: [],
-    },
-  ],
-  labels: [],
-};
-
-function createDoughnutChart() {
-  var ctx = document.getElementById("doughnutChart").getContext("2d");
-  new Chart(ctx, {
-    type: "doughnut",
-    data: data,
-  });
-}
-
-function createPieChart() {
-  var ctx = document.getElementById("pieChart").getContext("2d");
-  new Chart(ctx, {
-    type: "pie",
-    data: data,
-  });
-}
-
-function createBarChart() {
-  new Chart(document.getElementById("barChart").getContext("2d"), {
-    type: 'bar',
-    data: data,
-  });
-}
-
-function getBudget() {
-  const userId = parseInt(localStorage.getItem('userId'));
-  const localData = { userId };
-  axios.post("http://localhost:3000/budget", localData).then(function (res) {
-    for (var i = 0; i < res.data.length; i++) {
-      data.datasets[0].data[i] = res.data[i].budget;
-      data.datasets[0].backgroundColor[i] = res.data[i].backgroundColor;
-      data.labels[i] = res.data[i].label;
+function authorize() {
+  const token = localStorage.getItem('jwt');
+  axios.get('http://localhost:3000/authorize', {
+    headers: {
+      'Authorization': `Bearer ${token}`
     }
-    if (res.data.length > 0) {
-      createDoughnutChart();
-      createPieChart();
-      createBarChart();
-    }
+  }).catch(err => {
+    if (err)
+      history.push('/login');
   });
 }
-
 
 function HomePage() {
-  getBudget();
+  React.useEffect(() => {
+    authorize();
+  }, []);
   return (
     <div id="main" className="container center">
       <div className="page-area">
@@ -117,21 +81,7 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="text-box">
-          <h1>Pie Chart</h1>
-          <p><canvas id="pieChart" width="400" height="400"></canvas></p>
-        </div>
-
-        <div className="text-box">
-          <h1>Doughnut Chart</h1>
-          <p><canvas id="doughnutChart" width="400" height="400"></canvas></p>
-        </div>
-
-        <div className="text-box">
-          <h1>Bar Chart</h1>
-          <p><canvas id="barChart" width="400" height="400"></canvas></p>
-        </div>
-
+        <GetBudgetAndCharts />
       </div>
     </div>
   );
