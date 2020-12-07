@@ -122,7 +122,7 @@ export async function getActualExpenses() {
   const data = { userId };
   const token = localStorage.getItem('jwt');
   var results;
-  await axios.post('https://personal-b-final-jazug.ondigitalocean.app/actual/get', data, {
+  await axios.post('http://localhost:3000/actual/get', data, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -137,7 +137,7 @@ export async function getBudgetsWithoutActualExpenses() {
   const data = { userId };
   const token = localStorage.getItem('jwt');
   var results;
-  await axios.post('https://personal-b-final-jazug.ondigitalocean.app/actual/get/unused', data, {
+  await axios.post('http://localhost:3000/actual/get/unused', data, {
     headers: {
         'Authorization': `Bearer ${token}`
     }
