@@ -122,7 +122,7 @@ export async function getActualExpenses() {
   const data = { userId };
   const token = localStorage.getItem('jwt');
   var results;
-  await axios.post('http://personal-budget-final-ednzw.ondigitalocean.app/personal-b-final-server:8080/actual/get', data, {
+  await axios.post('https://personal-budget-final-ednzw.ondigitalocean.app/personal-b-final-server:8080/actual/get', data, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
@@ -137,7 +137,7 @@ export async function getBudgetsWithoutActualExpenses() {
   const data = { userId };
   const token = localStorage.getItem('jwt');
   var results;
-  await axios.post('http://personal-budget-final-ednzw.ondigitalocean.app/personal-b-final-server:8080/actual/get/unused', data, {
+  await axios.post('https://personal-budget-final-ednzw.ondigitalocean.app/personal-b-final-server:8080/actual/get/unused', data, {
     headers: {
         'Authorization': `Bearer ${token}`
     }
