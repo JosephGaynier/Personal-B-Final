@@ -107,7 +107,7 @@ export async function getBudget() {
   const localData = { userId };
   const token = localStorage.getItem('jwt');
   var results;
-  await axios.post("http://localhost:3000/budget/get", localData, {
+  await axios.post("https://personal-budget-final-ednzw.ondigitalocean.app/personal-b-final-server:8080/budget/get", localData, {
       headers: {
           'Authorization': `Bearer ${token}`
       }
