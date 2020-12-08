@@ -7,7 +7,7 @@ function login(username, password) {
     username,
     password
   };
-  axios.post('https://personal-budget-final-ednzw.ondigitalocean.app/personal-b-final-server:8080/login', data)
+  axios.post('https://personal-budget-final-ednzw.ondigitalocean.app/personal-b-final-server/login', data)
       .then(res => {
           console.log(res);
           if (res && res.data && res.data.success) {
