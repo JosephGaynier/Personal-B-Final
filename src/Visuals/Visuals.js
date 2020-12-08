@@ -2,22 +2,6 @@ import React from 'react';
 import Chart from 'chart.js';
 import axios from 'axios';
 
-var barChartData = {
-  datasets: [
-    {
-      label: "Projected",
-      data: [],
-      backgroundColor: "#0000FF"
-    },
-    {
-      label: "Actual",
-      data: [],
-      backgroundColor: "#008000"
-    }
-  ],
-  labels: [],
-};
-
 export function calculateTotals(responseData) {
   var totalBudget = 0;
   var totalExpense = 0;
@@ -77,6 +61,21 @@ export function createPieChart(responseData, isForActual) {
 }
   
 export function createBarChart(responseData) {
+  var barChartData = {
+    datasets: [
+      {
+        label: "Projected",
+        data: [],
+        backgroundColor: "#0000FF"
+      },
+      {
+        label: "Actual",
+        data: [],
+        backgroundColor: "#008000"
+      }
+    ],
+    labels: [],
+  };
   for (var i = 0; i < responseData.length; i++) {
     barChartData.datasets[0].data[i] = responseData[i].budget;
     barChartData.datasets[1].data[i] = responseData[i].actualExpense;
