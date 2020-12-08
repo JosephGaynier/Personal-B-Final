@@ -73,7 +73,7 @@ export default class EditBudgetPage extends React.Component {
       userId
     };
     const token = localStorage.getItem('jwt');
-    axios.post('https://personal-budget-final-ednzw.ondigitalocean.app/personal-b-final-server:8080/actual/add', data, {
+    axios.post('https://personal-budget-final-ednzw.ondigitalocean.app/personal-b-final-server/actual/add', data, {
       headers: {
           'Authorization': `Bearer ${token}`
       }
@@ -101,7 +101,7 @@ export default class EditBudgetPage extends React.Component {
 
   authorize() {
     const token = localStorage.getItem('jwt');
-    axios.get('https://personal-budget-final-ednzw.ondigitalocean.app/personal-b-final-server:8080/authorize', {
+    axios.get('https://personal-budget-final-ednzw.ondigitalocean.app/personal-b-final-server/authorize', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
